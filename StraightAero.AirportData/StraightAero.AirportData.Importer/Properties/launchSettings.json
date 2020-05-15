@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "StraightAero.AirportData.Importer": {
+      "commandName": "Project",
+      "commandLineArgs": "-path C:\\Users\\rheck\\Downloads\\28DaySubscription_Effective_2020-01-30\\Layout_Data  -schema C:\\Temp\\faa -classes C:\\Temp\\faa\\classes"
+    }
+  }
+}
