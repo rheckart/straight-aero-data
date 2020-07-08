@@ -3,8 +3,9 @@ using System.Collections.Generic;
 
 namespace StraightAero.AirportData.Main
 {
-	public class LandingFacility
+	public class LandingFacilityData
 	{
+		public string RecordTypeIndicator { get; set; }
 		public string LandingFacilitySiteNumber { get; set; }
 		public string LandingFacilityType { get; set; }
 		public string LocationIdentifier { get; set; }
@@ -84,19 +85,19 @@ namespace StraightAero.AirportData.Main
 		public string LensColorOfOperableBeaconLocatedOnTheAirport { get; set; }
 		public string LandingFeeChargedToNoncommercialUsersOf { get; set; }
 		public string AYInThisFieldIndicatesThatTheLanding { get; set; }
-		public int SingleEngineGeneralAviationAircraft { get; set; }
-		public int MultiEngineGeneralAviationAircraft { get; set; }
-		public int JetEngineGeneralAviationAircraft { get; set; }
-		public int GeneralAviationHelicopter { get; set; }
-		public int OperationalGliders { get; set; }
-		public int OperationalMilitaryAircraftIncludingHelicopters { get; set; }
-		public int UltralightAircraft { get; set; }
-		public int CommercialServices { get; set; }
-		public int CommuterServices { get; set; }
-		public int AirTaxi { get; set; }
-		public int GeneralAviationLocalOperations { get; set; }
-		public int GeneralAviationItinerantOperations { get; set; }
-		public int MilitaryAircraftOperations { get; set; }
+		public int? SingleEngineGeneralAviationAircraft { get; set; }
+		public int? MultiEngineGeneralAviationAircraft { get; set; }
+		public int? JetEngineGeneralAviationAircraft { get; set; }
+		public int? GeneralAviationHelicopter { get; set; }
+		public int? OperationalGliders { get; set; }
+		public int? OperationalMilitaryAircraftIncludingHelicopters { get; set; }
+		public int? UltralightAircraft { get; set; }
+		public int? CommercialServices { get; set; }
+		public int? CommuterServices { get; set; }
+		public int? AirTaxi { get; set; }
+		public int? GeneralAviationLocalOperations { get; set; }
+		public int? GeneralAviationItinerantOperations { get; set; }
+		public int? MilitaryAircraftOperations { get; set; }
 		public DateTime TwelveMonthEndingDateOnWhichAnnualOperationsData { get; set; }
 		public string AirportPositionSource { get; set; }
 		public DateTime AirportPositionSourceDate { get; set; }
@@ -109,11 +110,8 @@ namespace StraightAero.AirportData.Main
 		public string IcaoIdentifier { get; set; }
 		public string MinimumOperationalNetworkmon { get; set; }
 		public string AirportRecordFillerBlank { get; set; }
-		
-		public List<FacilityAttendanceScheduleData> FacilityAttendanceScheduleData { get; set; }
-		public List<FacilityRunwayData> FacilityRunwayData { get; set; }
-		public List<RunwayArrestingSystemData> RunwayArrestingSystemData { get; set; }
-		public List<FacilityRemarkData> FacilityRemarkData { get; set; }
+
+		public List<FacilityRunwayData> Runways { get; set; }
 	}
 
 	public class FacilityAttendanceScheduleData
