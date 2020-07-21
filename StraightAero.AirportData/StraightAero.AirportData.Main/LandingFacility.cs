@@ -58,7 +58,7 @@ namespace StraightAero.AirportData.Main
 		public string TollFreePhoneNumberFromAirportTo { get; set; }
 		public string IdentifierOfTheFacilityResponsibleFor { get; set; }
 		public string AvailabilityOfNotamDServiceAtAirport { get; set; }
-		public DateTime AirportActivationDateMmyyyy { get; set; }
+		public DateTime? AirportActivationDateMmyyyy { get; set; }
 		public string AirportStatusCode { get; set; }
 		public string AirportArffCertificationTypeAndDate { get; set; }
 		public string NpiasfederalAgreementsCode { get; set; }
@@ -69,8 +69,8 @@ namespace StraightAero.AirportData.Main
 		public string AirportHasEnteredIntoAnAgreementThat { get; set; }
 		public string AirportInspectionMethod { get; set; }
 		public string AgencygroupPerformingPhysicalInspection { get; set; }
-		public DateTime LastPhysicalInspectionDate { get; set; }
-		public DateTime LastDateInformationRequestWasCompleted { get; set; }
+		public DateTime? LastPhysicalInspectionDate { get; set; }
+		public DateTime? LastDateInformationRequestWasCompleted { get; set; }
 		public string FuelTypesAvailableForPublicUseAtThe { get; set; }
 		public string AirframeRepairServiceAvailabilitytype { get; set; }
 		public string PowerPlantEngineRepairAvailabilitytype { get; set; }
@@ -98,11 +98,11 @@ namespace StraightAero.AirportData.Main
 		public int? GeneralAviationLocalOperations { get; set; }
 		public int? GeneralAviationItinerantOperations { get; set; }
 		public int? MilitaryAircraftOperations { get; set; }
-		public DateTime TwelveMonthEndingDateOnWhichAnnualOperationsData { get; set; }
+		public DateTime? TwelveMonthEndingDateOnWhichAnnualOperationsData { get; set; }
 		public string AirportPositionSource { get; set; }
-		public DateTime AirportPositionSourceDate { get; set; }
+		public DateTime? AirportPositionSourceDate { get; set; }
 		public string AirportElevationSource { get; set; }
-		public DateTime AirportElevationSourceDate { get; set; }
+		public DateTime? AirportElevationSourceDate { get; set; }
 		public string ContractFuelAvailable { get; set; }
 		public string TransientStorageFacilities { get; set; }
 		public string OtherAirportServicesAvailable { get; set; }
@@ -111,7 +111,11 @@ namespace StraightAero.AirportData.Main
 		public string MinimumOperationalNetworkmon { get; set; }
 		public string AirportRecordFillerBlank { get; set; }
 
+		public List<FacilityAttendanceScheduleData> AttendanceSchedule { get; set; }
 		public List<FacilityRunwayData> Runways { get; set; }
+
+		public List<RunwayArrestingSystemData> ArrestingSystems { get; set; }
+		public List<FacilityRemarkData> Remarks { get; set; }
 	}
 
 	public class FacilityAttendanceScheduleData
@@ -205,7 +209,7 @@ namespace StraightAero.AirportData.Main
 		public string ControllingObjectDistanceFromRunwayEnd1 { get; set; }
 		public string ControllingObjectCenterlineOffset1 { get; set; }
 		public string RunwayLengthSource { get; set; }
-		public DateTime RunwayLengthSourceDate { get; set; }
+		public DateTime? RunwayLengthSourceDate { get; set; }
 		public string RunwayWeightbearingCapacityForS { get; set; }
 		public string RunwayWeightbearingCapacityForD { get; set; }
 		public string RunwayWeightbearingCapacityForT { get; set; }
@@ -213,15 +217,15 @@ namespace StraightAero.AirportData.Main
 		public string RunwayEndGradient { get; set; }
 		public string RunwayEndGradientDirectionUpOrDown { get; set; }
 		public string RunwayEndPositionSource { get; set; }
-		public DateTime RunwayEndPositionSourceDate { get; set; }
+		public DateTime? RunwayEndPositionSourceDate { get; set; }
 		public string RunwayEndElevationSource { get; set; }
-		public DateTime RunwayEndElevationSourceDate { get; set; }
+		public DateTime? RunwayEndElevationSourceDate { get; set; }
 		public string DisplacedThesholdPositionSource { get; set; }
-		public DateTime DisplacedThesholdPositionSourceDate { get; set; }
+		public DateTime? DisplacedThesholdPositionSourceDate { get; set; }
 		public string DisplacedThesholdElevationSource { get; set; }
-		public DateTime DisplacedThesholdElevationSourceDate { get; set; }
+		public DateTime? DisplacedThesholdElevationSourceDate { get; set; }
 		public string TouchdownZoneElevationSource { get; set; }
-		public DateTime TouchdownZoneElevationSourceDate { get; set; }
+		public DateTime? TouchdownZoneElevationSourceDate { get; set; }
 		public string TakeoffRunAvailableToraInFeet { get; set; }
 		public string TakeoffDistanceAvailableTodaInFeet { get; set; }
 		public string AcltStopDistanceAvailableAsdaInFeet { get; set; }
@@ -234,19 +238,19 @@ namespace StraightAero.AirportData.Main
 		public string LongitudeOfLahsoHoldShortPointFormatted { get; set; }
 		public string LongitudeOfLahsoHoldShortPointSeconds { get; set; }
 		public string LahsoHoldShortPointLatlongSource { get; set; }
-		public DateTime HoldShortPointLatlongSourceDate { get; set; }
+		public DateTime? HoldShortPointLatlongSourceDate { get; set; }
 		public string RunwayEndGradient1 { get; set; }
 		public string RunwayEndGradientDirectionUpOrDown1 { get; set; }
 		public string RunwayEndPositionSource1 { get; set; }
-		public DateTime RunwayEndPositionSourceDate1 { get; set; }
+		public DateTime? RunwayEndPositionSourceDate1 { get; set; }
 		public string RunwayEndElevationSource1 { get; set; }
-		public DateTime RunwayEndElevationSourceDate1 { get; set; }
+		public DateTime? RunwayEndElevationSourceDate1 { get; set; }
 		public string DisplacedThesholdPositionSource1 { get; set; }
-		public DateTime DisplacedThesholdPositionSourceDate1 { get; set; }
+		public DateTime? DisplacedThesholdPositionSourceDate1 { get; set; }
 		public string DisplacedThesholdElevationSource1 { get; set; }
-		public DateTime DisplacedThesholdElevationSourceDate1 { get; set; }
+		public DateTime? DisplacedThesholdElevationSourceDate1 { get; set; }
 		public string TouchdownZoneElevationSource1 { get; set; }
-		public DateTime TouchdownZoneElevationSourceDate1 { get; set; }
+		public DateTime? TouchdownZoneElevationSourceDate1 { get; set; }
 		public string TakeoffRunAvailableToraInFeet1 { get; set; }
 		public string TakeoffDistanceAvailableTodaInFeet1 { get; set; }
 		public string AcltStopDistanceAvailableAsdaInFeet1 { get; set; }
@@ -259,7 +263,7 @@ namespace StraightAero.AirportData.Main
 		public string LongitudeOfLahsoHoldShortPointFormatted1 { get; set; }
 		public string LongitudeOfLahsoHoldShortPointSeconds1 { get; set; }
 		public string LahsoHoldShortPointLatlongSource1 { get; set; }
-		public DateTime HoldShortPointLatlongSourceDate1 { get; set; }
+		public DateTime? HoldShortPointLatlongSourceDate1 { get; set; }
 		public string RunwayRecordFillerBlank { get; set; }
 	}
 

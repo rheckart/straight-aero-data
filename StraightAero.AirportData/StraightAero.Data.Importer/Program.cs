@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text;
@@ -30,39 +31,57 @@ namespace StraightAero.Data.Importer
             
             var flr = selector.GetReader(reader);
 
-            LandingFacilityData airport;
+            LandingFacilityData airport = null;
 
             while (flr.Read())
             {
-                var test = flr.Current;
-
-                if (test is LandingFacilityData)
+                switch (flr.Current)
                 {
-                    airport = (LandingFacilityData)test;
+                    case LandingFacilityData landingFacilityData:
+
+                        if (airport != null)
+                        {
+                            // Save the record to the DB
+                            Console.WriteLine($"{airport.LocationIdentifier}");
+                        }
+
+                        airport = landingFacilityData;
+
+                        break;
+
+                    case FacilityAttendanceScheduleData fa:
+
+                        airport.AttendanceSchedule ??= new List<FacilityAttendanceScheduleData>();
+                        airport.AttendanceSchedule.Add(fa);
+
+                        break;
+
+                    case FacilityRunwayData runway:
+
+                        airport.Runways ??= new List<FacilityRunwayData>();
+                        airport.Runways.Add(runway);
+
+                        break;
+
+                    case RunwayArrestingSystemData ras:
+
+                        airport.ArrestingSystems ??= new List<RunwayArrestingSystemData>();
+                        airport.ArrestingSystems.Add(ras);
+
+                        break;
+
+                    case FacilityRemarkData remark:
+
+                        airport.Remarks ??= new List<FacilityRemarkData>();
+                        airport.Remarks.Add(remark);
+
+                        break;
+
+                    default:
+
+                        throw new Exception("Not found");
                 }
-                //var values = flr.GetValues();
-
-                //if (values != null)
-                //{
-                //    if ((string)values[0] == "APT")
-                //    {
-                //        //var lfMapper = FixedLengthTypeMapper.Define<LandingFacility>();
-                //        //var schema = mapper.GetSchema();
-                //        //lfMapper.
-
-                //        //ProcessAirport(airport, values);                            
-
-                //        //Console.WriteLine($"New Airport: {(string)values[3]}");
-                //    }
-                //}
             }
         }
-
-        //private static void ProcessAirport(LandingFacility airport, object[] values)
-        //{
-        //    airport.LandingFacilitySiteNumber = (string)values[1];
-        //    airport.LandingFacilityType = (string)values[2];
-        //    airport.LocationIdentifier = (string)values[3];
-        //}
     }
 }
