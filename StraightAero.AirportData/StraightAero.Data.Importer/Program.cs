@@ -1,54 +1,87 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
+using System.Text;
 using FlatFiles;
 using FlatFiles.TypeMapping;
 using StraightAero.AirportData.Main;
-using StraightAero.AirportData.Main.Schemas;
+using StraightAero.AirportData.Main.Mappers;
 
 namespace StraightAero.Data.Importer
 {
-    class Program
+    static class Program
     {
         static void Main(string[] args)
         {
             Console.WriteLine("Starting");
 
-            var selector = new FixedLengthSchemaSelector();
-            selector.When(s => s.StartsWith("APT")).Use(LandingFacilitySchema.GetSchema());
+            var selector = new FixedLengthTypeMapperSelector();
+            selector.When(s => s.StartsWith("APT")).Use(LandingFacilityMapper.GetLandingFacilityDataMapper());
             selector.When(s => s.StartsWith("ATT"))
-                .Use(LandingFacilitySchema.GetFacilityAttendanceScheduleSchema());
-            selector.When(s => s.StartsWith("RWY")).Use(LandingFacilitySchema.GetRunwaySchema());
+                .Use(LandingFacilityMapper.GetFacilityAttendanceScheduleDataMapper());
+            selector.When(s => s.StartsWith("RWY")).Use(LandingFacilityMapper.GetFacilityRunwayDataMapper());
             selector.When(s => s.StartsWith("ARS"))
-                .Use(LandingFacilitySchema.GetRunwayArrestingSystemSchema());
-            selector.When(s => s.StartsWith("RMK")).Use(LandingFacilitySchema.GetRemarkSchema());
+                .Use(LandingFacilityMapper.GetRunwayArrestingSystemDataMapper());
+            selector.When(s => s.StartsWith("RMK")).Use(LandingFacilityMapper.GetFacilityRemarkDataMapper());
 
-            using (var reader = new StreamReader(File.OpenRead(@"C:\Users\rheck\Downloads\28DaySubscription_Effective_2020-01-30\APT.txt")))
+            var mapit = new StringBuilder();
+
+            using var reader = new StreamReader(File.OpenRead(@"C:\Users\rheck\Downloads\28DaySubscription_Effective_2020-01-30\APT.txt"));
+            
+            var flr = selector.GetReader(reader);
+
+            LandingFacilityData airport = null;
+
+            while (flr.Read())
             {
-                var flr = new FixedLengthReader(reader, selector);
-                
-                while (flr.Read())
+                switch (flr.Current)
                 {
-                    var values = flr.GetValues();
-                    var airport = new LandingFacility();
+                    case LandingFacilityData landingFacilityData:
 
-                    if (values != null)
-                    {
-                        if ((string)values[0] == "APT")
+                        if (airport != null)
                         {
-                            ProcessAirport(airport, values);                            
-                            
-                            Console.WriteLine($"New Airport: {(string)values[3]}");
+                            // Save the record to the DB
+                            Console.WriteLine($"{airport.LocationIdentifier}");
                         }
-                    }
+
+                        airport = landingFacilityData;
+
+                        break;
+
+                    case FacilityAttendanceScheduleData fa:
+
+                        airport.AttendanceSchedule ??= new List<FacilityAttendanceScheduleData>();
+                        airport.AttendanceSchedule.Add(fa);
+
+                        break;
+
+                    case FacilityRunwayData runway:
+
+                        airport.Runways ??= new List<FacilityRunwayData>();
+                        airport.Runways.Add(runway);
+
+                        break;
+
+                    case RunwayArrestingSystemData ras:
+
+                        airport.ArrestingSystems ??= new List<RunwayArrestingSystemData>();
+                        airport.ArrestingSystems.Add(ras);
+
+                        break;
+
+                    case FacilityRemarkData remark:
+
+                        airport.Remarks ??= new List<FacilityRemarkData>();
+                        airport.Remarks.Add(remark);
+
+                        break;
+
+                    default:
+
+                        throw new Exception("Not found");
                 }
             }
-        }
-
-        private static void ProcessAirport(LandingFacility airport, object[] values)
-        {
-            airport.LandingFacilitySiteNumber = (string)values[1];
-            airport.LandingFacilityType = (string)values[2];
-            airport.LocationIdentifier = (string)values[3];
         }
     }
 }
