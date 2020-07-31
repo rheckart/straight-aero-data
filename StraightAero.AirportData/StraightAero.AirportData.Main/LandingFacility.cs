@@ -1,11 +1,13 @@
 using System;
 using System.Collections.Generic;
+using Microsoft.Azure.Cosmos.Spatial;
 
 namespace StraightAero.AirportData.Main
 {
 	public class LandingFacilityData
 	{
-		public string RecordTypeIndicator { get; set; }
+        public string id { get; set; }
+        public string RecordTypeIndicator { get; set; }
 		public string LandingFacilitySiteNumber { get; set; }
 		public string LandingFacilityType { get; set; }
 		public string LocationIdentifier { get; set; }
@@ -116,6 +118,8 @@ namespace StraightAero.AirportData.Main
 
 		public List<RunwayArrestingSystemData> ArrestingSystems { get; set; }
 		public List<FacilityRemarkData> Remarks { get; set; }
+
+		public Point Location { get; set; }
 	}
 
 	public class FacilityAttendanceScheduleData
