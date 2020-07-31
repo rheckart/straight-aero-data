@@ -5,6 +5,7 @@ This project takes FAA Aeronautical Data from the [28-day NASR Subscription](htt
    - Generate schemas for import using the [FlatFiles Nuget package](https://github.com/jehugaleahsa/FlatFiles),
    - Generate classes for import using FlatFiles.
 - Inside the StraightAero.Data.Importer project, the schema files and classes are used to write data into a CosmosDB database.
+   - This uses the [CoordinateSharp Nuget package](https://github.com/Tronald/CoordinateSharp) to take the lat/long for an airport and make CosmosDB Geography Points for them
 
 The Schema Importer is a console app that takes 3 command-line arguments:
 
