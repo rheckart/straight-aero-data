@@ -5,3 +5,9 @@ This project takes FAA Aeronautical Data from the [28-day NASR Subscription](htt
    - Generate schemas for import using the [FlatFiles Nuget package](https://github.com/jehugaleahsa/FlatFiles),
    - Generate classes for import using FlatFiles.
 - Inside the StraightAero.Data.Importer project, the schema files and classes are used to write data into a CosmosDB database.
+
+The Schema Importer is a console app that takes 3 command-line arguments:
+
+- path: the path to the downloaded & extracted FAA files,
+- schema: where the generated schema files should be written to,
+- classes: where the generated schema files should be written to.
