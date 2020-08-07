@@ -159,7 +159,7 @@ namespace StraightAero.Data.Importer
                                 navaid.Location = new Point(c.Longitude.DecimalDegree, c.Latitude.DecimalDegree);
                             }
 
-                            navaid.id = $"{navaid.NavaidFacilityIdentifier}|{navaid.NavaidFacilityType}|{navaid.CityAssociatedWithTheNavaid}";
+                            navaid.id = $"{navaid.NavaidFacilityIdentifier}|{navaid.NavaidFacilityType.Replace("/", string.Empty)}|{navaid.CityAssociatedWithTheNavaid}";
                             navaid.RecordTypeIndicator = "NAVAID";
 
                             try

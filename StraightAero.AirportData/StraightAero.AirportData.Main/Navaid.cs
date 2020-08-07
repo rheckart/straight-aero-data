@@ -48,7 +48,7 @@ namespace StraightAero.AirportData.Main
 		public string RadioVoiceCallName { get; set; }
 		public string ChannelTacanNavaidTransmitsOn { get; set; }
 		public decimal? FrequencyTheNavaidTransmitsOn { get; set; }
-		public int? TransmittedFanMarkermarineRadioBeacon { get; set; }
+		public string TransmittedFanMarkermarineRadioBeacon { get; set; }
 		public string FanMarkerTypeBoneOrElliptical { get; set; }
 		public string TrueBearingOfMajorAxisOfFanMarker { get; set; }
 		public string ProtectedFrequencyAltitude { get; set; }
@@ -101,7 +101,7 @@ namespace StraightAero.AirportData.Main
 		public string NavaidFacilityIdentifier { get; set; }
 		public string NavaidFacitityTypeExVordme { get; set; }
 		public string NamesOfHoldingPatterns { get; set; }
-		public int PatternNumberOfTheHoldingPattern { get; set; }
+		public int? PatternNumberOfTheHoldingPattern { get; set; }
 		public string SpaceAllocatedFor8MoreHoldingPatterns { get; set; }
 		public string Blanks { get; set; }
 	}
@@ -122,8 +122,8 @@ namespace StraightAero.AirportData.Main
 		public string NavaidFacilityIdentifier { get; set; }
 		public string NavaidFacitityTypeExVordme { get; set; }
 		public string AirgroundCode { get; set; }
-		public int BearingOfCheckpoint { get; set; }
-		public int AltitudeOnlyWhenCheckpointIsInAir { get; set; }
+		public int? BearingOfCheckpoint { get; set; }
+		public int? AltitudeOnlyWhenCheckpointIsInAir { get; set; }
 		public string AirportId { get; set; }
 		public string StateCodeInWhichAssociatedCityIsLocated { get; set; }
 		public string NarrativeDescriptionAssociatedWith { get; set; }
